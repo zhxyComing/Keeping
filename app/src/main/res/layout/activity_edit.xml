@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EditActivity">
+
+    <LinearLayout
+        android:id="@+id/llBackupOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="bottom"
+            android:text="数据备份"
+            android:textColor="@color/colorTextTitleBlack"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvBackupHave"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:text="导出备份将覆盖已有备份，请谨慎操作。"
+            android:textColor="@color/colorTextContentBlack"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorTextContentBlack" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llBackupIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="bottom"
+            android:text="导入备份"
+            android:textColor="@color/colorTextTitleBlack"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:text="导入备份将覆盖当前数据，请谨慎操作。"
+            android:textColor="@color/colorTextContentBlack"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorTextContentBlack" />
+
+    </LinearLayout>
+
+</LinearLayout>

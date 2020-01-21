@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.actionbartest.MainActivity">
+
+    <item
+        android:id="@+id/action_out"
+        android:icon="@mipmap/out"
+        android:title="支出分析（不含收入）"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_month"
+        android:icon="@mipmap/month"
+        android:title="每月的支出（不含收入）"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_day"
+        android:icon="@mipmap/day"
+        android:title="每天的收支（包含收入）"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@mipmap/edit"
+        android:title="设置"
+        app:showAsAction="always" />
+
+</menu>
