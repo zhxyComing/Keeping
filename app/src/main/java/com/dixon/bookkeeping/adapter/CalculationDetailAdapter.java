@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.dixon.bookkeeping.R;
 import com.dixon.bookkeeping.bean.DetailItemBean;
+import com.dixon.bookkeeping.bean.ITag;
 import com.dixon.bookkeeping.util.AppFontUtil;
 
 import java.util.List;
@@ -20,15 +21,18 @@ public class CalculationDetailAdapter extends BaseAdapter implements IDetailData
     private Context mContext;
     private OnProductDescClickListener onProductDescClickListener;
     private OnTimeDescClickListener onTimeDescClickListener;
+    private OnTagClickListener onTagClickListener;
 
     public CalculationDetailAdapter(Context context,
                                     List<DetailItemBean> details,
                                     OnProductDescClickListener onProductDescClickListener,
-                                    OnTimeDescClickListener onTimeDescClickListener) {
+                                    OnTimeDescClickListener onTimeDescClickListener,
+                                    OnTagClickListener onTagClickListener) {
         this.mContext = context;
         this.mDetails = details;
         this.onProductDescClickListener = onProductDescClickListener;
         this.onTimeDescClickListener = onTimeDescClickListener;
+        this.onTagClickListener = onTagClickListener;
     }
 
     @Override
@@ -89,9 +93,38 @@ public class CalculationDetailAdapter extends BaseAdapter implements IDetailData
                 }
             }
         });
+        vh.tagView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onTagClickListener != null) {
+                    onTagClickListener.onClick(itemDetail, position);
+                }
+            }
+        });
 
         AppFontUtil.setNumberFont(vh.amountView);
+        setTagIcon(vh.tagView, itemDetail.getTag());
         return convertView;
+    }
+
+    private void setTagIcon(ImageView tagView, String tag) {
+        if (tag == null) {
+            tagView.setImageResource(R.mipmap.tag_no_select);
+            return;
+        }
+        switch (tag) {
+            case ITag.TAG_GAME:
+                tagView.setImageResource(R.mipmap.tag_game);
+                break;
+            case ITag.TAG_MARKS:
+                tagView.setImageResource(R.mipmap.tag_marks);
+                break;
+            case ITag.TAG_EAT:
+                tagView.setImageResource(R.mipmap.tag_eat);
+                break;
+            default:
+                tagView.setImageResource(R.mipmap.tag_no_select);
+        }
     }
 
     public interface OnProductDescClickListener {
@@ -106,15 +139,21 @@ public class CalculationDetailAdapter extends BaseAdapter implements IDetailData
         void onClick(DetailItemBean bean, int position);
     }
 
+    public interface OnTagClickListener {
+        void onClick(DetailItemBean bean, int position);
+    }
+
     private static final class ViewHolder {
 
         private TextView timeDescView, productDescView, amountView, symbolView;
+        private ImageView tagView;
 
         ViewHolder(View item) {
             timeDescView = item.findViewById(R.id.tvTimeDesc);
             productDescView = item.findViewById(R.id.tvProductDesc);
             amountView = item.findViewById(R.id.tvAmount);
             symbolView = item.findViewById(R.id.tvSymbol);
+            tagView = item.findViewById(R.id.ivTagChoose);
         }
     }
 }

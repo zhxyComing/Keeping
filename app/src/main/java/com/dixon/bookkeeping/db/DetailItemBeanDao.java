@@ -29,6 +29,7 @@ public class DetailItemBeanDao extends AbstractDao<DetailItemBean, Long> {
         public final static Property InOrOut = new Property(2, boolean.class, "inOrOut", false, "IN_OR_OUT");
         public final static Property Amount = new Property(3, long.class, "amount", false, "AMOUNT");
         public final static Property ProductDesc = new Property(4, String.class, "productDesc", false, "PRODUCT_DESC");
+        public final static Property Tag = new Property(5, String.class, "tag", false, "TAG");
     }
 
 
@@ -48,7 +49,8 @@ public class DetailItemBeanDao extends AbstractDao<DetailItemBean, Long> {
                 "\"TIME_DESC\" TEXT," + // 1: timeDesc
                 "\"IN_OR_OUT\" INTEGER NOT NULL ," + // 2: inOrOut
                 "\"AMOUNT\" INTEGER NOT NULL ," + // 3: amount
-                "\"PRODUCT_DESC\" TEXT);"); // 4: productDesc
+                "\"PRODUCT_DESC\" TEXT," + // 4: productDesc
+                "\"TAG\" TEXT);"); // 5: tag
     }
 
     /** Drops the underlying database table. */
@@ -73,6 +75,11 @@ public class DetailItemBeanDao extends AbstractDao<DetailItemBean, Long> {
         if (productDesc != null) {
             stmt.bindString(5, productDesc);
         }
+ 
+        String tag = entity.getTag();
+        if (tag != null) {
+            stmt.bindString(6, tag);
+        }
     }
 
     @Override
@@ -91,6 +98,11 @@ public class DetailItemBeanDao extends AbstractDao<DetailItemBean, Long> {
         if (productDesc != null) {
             stmt.bindString(5, productDesc);
         }
+ 
+        String tag = entity.getTag();
+        if (tag != null) {
+            stmt.bindString(6, tag);
+        }
     }
 
     @Override
@@ -105,7 +117,8 @@ public class DetailItemBeanDao extends AbstractDao<DetailItemBean, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // timeDesc
             cursor.getShort(offset + 2) != 0, // inOrOut
             cursor.getLong(offset + 3), // amount
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // productDesc
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // productDesc
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // tag
         );
         return entity;
     }
@@ -117,6 +130,7 @@ public class DetailItemBeanDao extends AbstractDao<DetailItemBean, Long> {
         entity.setInOrOut(cursor.getShort(offset + 2) != 0);
         entity.setAmount(cursor.getLong(offset + 3));
         entity.setProductDesc(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setTag(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

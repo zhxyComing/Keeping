@@ -17,6 +17,7 @@ public class DetailItemBean {
     private boolean inOrOut; //true is in
     private long amount;
     private String productDesc;
+    private String tag;
 
     public DetailItemBean() {
         this.id = System.currentTimeMillis();
@@ -30,14 +31,23 @@ public class DetailItemBean {
         this.id = System.currentTimeMillis();
     }
 
-    @Generated(hash = 1318208913)
+    @Generated(hash = 410012062)
     public DetailItemBean(long id, String timeDesc, boolean inOrOut, long amount,
-            String productDesc) {
+            String productDesc, String tag) {
         this.id = id;
         this.timeDesc = timeDesc;
         this.inOrOut = inOrOut;
         this.amount = amount;
         this.productDesc = productDesc;
+        this.tag = tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getTag() {
+        return tag;
     }
 
     public String getTimeDesc() {

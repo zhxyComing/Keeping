@@ -35,6 +35,14 @@ public class BookPresenter {
         bookActivity.setDetailListView(detailItemBeans);
     }
 
+    //加载详情列表
+    public void allocDetailListToLastPosition() {
+        List<DetailItemBean> detailItemBeans = DetailDao.instance().queryAll();
+        //时间倒序显示
+        DataParser.getSortDetailList(detailItemBeans);
+        bookActivity.setDetailListViewToLastPosition(detailItemBeans);
+    }
+
     //返回顺序的 DetailList
     private List<DetailItemBean> getSortDetailList() {
         List<DetailItemBean> detailItemBeans = DetailDao.instance().queryAll();
@@ -87,6 +95,12 @@ public class BookPresenter {
         bean.setTimeDesc(desc);
         DetailDao.instance().update(bean);
         allocDetailList();
+    }
+
+    public void updateTag(String tag, DetailItemBean bean){
+        bean.setTag(tag);
+        DetailDao.instance().update(bean);
+        allocDetailListToLastPosition();
     }
 
     public String getSummaryData() {

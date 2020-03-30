@@ -3,6 +3,7 @@ package com.dixon.bookkeeping;
 import androidx.annotation.NonNull;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ public class EditActivity extends BaseActivity implements View.OnClickListener {
     private static final int BACKUP_IN = 0x1;
     private static final int BACKUP_OUT = 0x2;
 
-    private LinearLayout mBackupIn, mBackupOut;
+    private LinearLayout mBackupIn, mBackupOut, mDataParse;
     private TextView mBackupHave;
 
     @Override
@@ -36,6 +37,7 @@ public class EditActivity extends BaseActivity implements View.OnClickListener {
     private void initView() {
         mBackupIn.setOnClickListener(this);
         mBackupOut.setOnClickListener(this);
+        mDataParse.setOnClickListener(this);
     }
 
     @Override
@@ -44,6 +46,7 @@ public class EditActivity extends BaseActivity implements View.OnClickListener {
         mBackupIn = findViewById(R.id.llBackupIn);
         mBackupOut = findViewById(R.id.llBackupOut);
         mBackupHave = findViewById(R.id.tvBackupHave);
+        mDataParse = findViewById(R.id.llDataParse);
     }
 
     @Override
@@ -58,6 +61,9 @@ public class EditActivity extends BaseActivity implements View.OnClickListener {
                 if (askReadWritePermission(BACKUP_OUT)) {
                     backupOut();
                 }
+                break;
+            case R.id.llDataParse:
+                startActivity(new Intent(EditActivity.this, DataParseActivity.class));
                 break;
         }
     }

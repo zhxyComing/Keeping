@@ -23,6 +23,7 @@ import com.dixon.bookkeeping.base.AppStateTracker;
 import com.dixon.bookkeeping.base.BaseActivity;
 import com.dixon.bookkeeping.bean.DayItemBean;
 import com.dixon.bookkeeping.bean.DetailItemBean;
+import com.dixon.bookkeeping.bean.ITag;
 import com.dixon.bookkeeping.bean.MonthItemBean;
 import com.dixon.bookkeeping.util.AppFontUtil;
 import com.dixon.bookkeeping.util.AppStringUtil;
@@ -186,7 +187,53 @@ public class BookActivity extends BaseActivity implements View.OnClickListener, 
                     public void onClick(DetailItemBean bean, int position) {
                         timeDescDialog(bean, position);
                     }
+                },
+                new CalculationDetailAdapter.OnTagClickListener() {
+                    @Override
+                    public void onClick(DetailItemBean bean, int position) {
+                        tagDialog(bean, position);
+                    }
                 }));
+    }
+
+    //设置列表 回归上次位置
+    public void setDetailListViewToLastPosition(List<DetailItemBean> details) {
+        int firstVisiblePosition = mDetailView.getFirstVisiblePosition();
+        // 获取当前可视区域指定位置的view，这里传0，所以获取的是第一条 记住，ListView是复用Item的！
+        View v = mDetailView.getChildAt(0);
+        int top = v.getTop();
+        setDetailListView(details);
+        mDetailView.setSelectionFromTop(firstVisiblePosition, top);
+    }
+
+    private void tagDialog(final DetailItemBean bean, int position) {
+        List<String> data = new ArrayList<>();
+        data.add("标签：游戏");
+        data.add("标签：购物");
+        data.add("标签：食物");
+        data.add("清空标签");
+        data.add("关闭");
+
+        DialogUtil.showListSelectDialog(data, new DialogInterface.OnItemClickListener<MDSelectionDialog>() {
+            @Override
+            public void onItemClick(MDSelectionDialog dialog, View button, int position) {
+                switch (position) {
+                    case 0:
+                        mPresenter.updateTag(ITag.TAG_GAME, bean);
+                        break;
+                    case 1:
+                        mPresenter.updateTag(ITag.TAG_MARKS, bean);
+                        break;
+                    case 2:
+                        mPresenter.updateTag(ITag.TAG_EAT, bean);
+                        break;
+                    case 3:
+                        mPresenter.updateTag(ITag.TAG_EMPTY, bean);
+                        break;
+                }
+                dialog.dismiss();
+            }
+        });
     }
 
     public void productDescDialog(final DetailItemBean bean, final int position) {

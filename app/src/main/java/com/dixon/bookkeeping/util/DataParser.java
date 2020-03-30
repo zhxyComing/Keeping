@@ -152,7 +152,9 @@ public final class DataParser {
         //时间倒序显示
         Collections.sort(srcList, new Comparator<DetailItemBean>() {
             public int compare(DetailItemBean arg0, DetailItemBean arg1) {
-                return (int) (AppStringUtil.getTime(arg0.getTimeDesc()) - AppStringUtil.getTime(arg1.getTimeDesc()));
+                long time0 = AppStringUtil.getTime(arg0.getTimeDesc());
+                long time1 = AppStringUtil.getTime(arg1.getTimeDesc());
+                return Long.compare(time0, time1);
             }
         });
         Collections.reverse(srcList);
