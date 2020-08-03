@@ -1,9 +1,6 @@
 package com.dixon.bookkeeping.util;
 
-import android.graphics.Typeface;
 import android.widget.TextView;
-
-import com.dixon.bookkeeping.base.BaseApplication;
 
 public final class AppFontUtil {
 
